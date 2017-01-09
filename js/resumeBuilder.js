@@ -69,12 +69,13 @@ $("#header").append(HTMLskillsStart);
 $("#header").append(HTMLskills.replace("%data%",bio.skills));
 
 //Work Experience
-$("#workExperience").append(HTMLworkStart);
+
 for (var i = 0; i < work.length; i++) {
-	$(".work-entry").append(HTMLworkEmployer.replace("%data%",work[i].employer)+HTMLworkTitle.replace("%data%",work[i].title));
-	$(".work-entry").append(HTMLworkDates.replace("%data%",work[i].date));
-	$(".work-entry").append(HTMLworkLocation.replace("%data%",work[i].location));
-	$(".work-entry").append(HTMLworkDescription.replace("%data%",work[i].description));
+	$("#workExperience").append(HTMLworkStart);
+	$(".work-entry").eq(i).append(HTMLworkEmployer.replace("%data%",work[i].employer)+HTMLworkTitle.replace("%data%",work[i].title));
+	$(".work-entry").eq(i).append(HTMLworkDates.replace("%data%",work[i].date));
+	$(".work-entry").eq(i).append(HTMLworkLocation.replace("%data%",work[i].location));
+	$(".work-entry").eq(i).append(HTMLworkDescription.replace("%data%",work[i].description));
 }
 
 //projects
@@ -88,10 +89,13 @@ for (var i = 0; i < work.length; i++) {
 
 //education
 $("#education").append(HTMLschoolStart);
-for (var i = 0; i < work.length; i++) {
+for (var i = 0; i < education.length; i++) {
 	$(".education-entry").append(HTMLschoolName.replace("%data%",education[i].school) + HTMLschoolDegree.replace("%data%",education[i].degree));
 	$(".education-entry").append(HTMLschoolDates.replace("%data%",education[i].date));
 	$(".education-entry").append(HTMLschoolLocation.replace("%data%",education[i].location));
 	$(".education-entry").append(HTMLschoolMajor.replace("%data%",education[i].major));
 }
 
+$(document).click(function(loc){
+	console.log("X=" + loc.pageX + ", Y=" + loc.pageY);
+})
