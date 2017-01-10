@@ -5,11 +5,11 @@ This is empty on purpose! Your code to build the resume will go here.
 var bio = {
 	"name": "James Ni",
 	"role": "Web Developer",
-	"contact": {
+	"contacts": {
 		"mobile": "+86 186-2195-4080",
 		"email": "ni.ningning@gmail.com",
 		"github": "guangtoutou",
-		"location": "Shanghai, China"
+		"location": "Melbourne, Australia"
 	},
 	"pic": "images/fry.jpg",
 	"welcomeMsg": "hello",
@@ -27,7 +27,7 @@ var work = [{
 	"employer": "Pepsico",
 	"title": "IT supervisor",
 	"date": "May 2007",
-	"location": "Shanghai, China",
+	"location": "Shenzhen, China",
 	"description": "Lead and deliver Sales Force Automation Solution and Distributor Management System (ERP for distributors of Unilever) in China"
 }]
 
@@ -48,7 +48,7 @@ var education = [{
 	"school":"Shanghai Jiao Tong University",
 	"degree": "bachelor",
 	"date": "Sep 1999 to Jun 2003",
-	"location": "Shanghai, China",
+	"location": "Xiaogan, China",
 	"major": "Environmental Engineering"
 }]
 
@@ -56,10 +56,10 @@ var education = [{
 $("#header").prepend(HTMLheaderRole.replace("%data%",bio.role));
 $("#header").prepend(HTMLheaderName.replace("%data%",bio.name));
 
-$("#topContacts").append(HTMLmobile.replace("%data%",bio.contact.mobile));
-$("#topContacts").append(HTMLemail.replace("%data%",bio.contact.email));
-$("#topContacts").append(HTMLgithub.replace("%data%",bio.contact.github));
-$("#topContacts").append(HTMLlocation.replace("%data%",bio.contact.location));
+$("#topContacts").append(HTMLmobile.replace("%data%",bio.contacts.mobile));
+$("#topContacts").append(HTMLemail.replace("%data%",bio.contacts.email));
+$("#topContacts").append(HTMLgithub.replace("%data%",bio.contacts.github));
+$("#topContacts").append(HTMLlocation.replace("%data%",bio.contacts.location));
 
 $("#header").append(HTMLbioPic.replace("%data%",bio.pic));
 $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMsg));
@@ -79,13 +79,16 @@ for (var i = 0; i < work.length; i++) {
 }
 
 //projects
-$("#projects").append(HTMLprojectStart);
-for (var i = 0; i < work.length; i++) {
-	$(".project-entry").append(HTMLprojectTitle.replace("%data%",projects[i].title));
-	$(".project-entry").append(HTMLprojectDates.replace("%data%",projects[i].date));
-	$(".project-entry").append(HTMLprojectDescription.replace("%data%",projects[i].description));
-	$(".project-entry").append(HTMLprojectImage.replace("%data%",projects[i].image));
+projects.display = function(){
+	for (var i = 0; i < work.length; i++) {
+		$("#projects").append(HTMLprojectStart);
+		$(".project-entry").eq(i).append(HTMLprojectTitle.replace("%data%",projects[i].title));
+		$(".project-entry").eq(i).append(HTMLprojectDates.replace("%data%",projects[i].date));
+		$(".project-entry").eq(i).append(HTMLprojectDescription.replace("%data%",projects[i].description));
+		$(".project-entry").eq(i).append(HTMLprojectImage.replace("%data%",projects[i].image));
+	}	
 }
+projects.display();
 
 //education
 $("#education").append(HTMLschoolStart);
@@ -99,3 +102,6 @@ for (var i = 0; i < education.length; i++) {
 $(document).click(function(loc){
 	console.log("X=" + loc.pageX + ", Y=" + loc.pageY);
 })
+
+//map
+$("#mapDiv").append(googleMap);
